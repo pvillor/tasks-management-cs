@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TasksManagement.Application.UseCases.Tasks.Create;
+using TasksManagement.Application.UseCases.Tasks.FetchAll;
 using TasksManagement.Communication.Requests;
 using TasksManagement.Communication.Responses;
 
@@ -16,5 +17,16 @@ public class TasksController : TasksManagementBaseController
         var response = useCase.Execute(request);
 
         return Created(string.Empty, response);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseTasksJson), StatusCodes.Status200OK)]
+    public IActionResult FetchAll()
+    {
+        var useCase = new FetchAllTasksUseCase(Tasks);
+
+        var response = useCase.Execute();
+
+        return Ok(response);
     }
 }

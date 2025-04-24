@@ -6,5 +6,5 @@ namespace TasksManagement.API.Controllers;
 [ApiController]
 public class TasksManagementBaseController : ControllerBase
 {
-    public List<Application.Entities.Task> Tasks = [];
+    public static List<Application.Entities.Task> Tasks = [];
 }
