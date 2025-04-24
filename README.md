@@ -1,12 +1,13 @@
 ### Requisitos
 
-O projeto deve conter: 
+#### O projeto deve conter: 
 
-             **Camada de comunicação**
+- Camada de comunicação
+- Camada de regras de negócios
 
-          **Camada de regras de negócios**
+---
 
-Uma tarefa deverá ter os seguintes campos:
+#### Uma tarefa deverá ter os seguintes campos:
 
 - Um id único pra identificar cada tarefa;
 - Um nome;
@@ -17,7 +18,9 @@ Uma tarefa deverá ter os seguintes campos:
 - Um status.
 *Você pode definir três status:* `concluída`*,* `em andamento` *e* `aguardando`*, por exemplo.*
 
-- [] Deve ser possível criar uma tarefa;
+---
+
+- [X] Deve ser possível criar uma tarefa;
 - [] Deve ser possível visualizar todas as tarefas criadas;
 - [] Deve ser possível visualizar uma tarefa buscando pelo seu id;
 - [] Deve ser possível editar informações de uma tarefa;
