@@ -36,7 +36,7 @@ public class TasksController : TasksManagementBaseController
     [HttpGet]
     [Route("{taskId}")]
     [ProducesResponseType(typeof(ResponseTaskJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public IActionResult GetById([FromRoute] int taskId)
     {
         var useCase = new GetTaskByIdUseCase(Tasks);
@@ -45,7 +45,7 @@ public class TasksController : TasksManagementBaseController
 
         if (response is null)
         {
-            return NotFound();
+            return NotFound("Task not found");
         }
 
         return Ok(response);
@@ -54,26 +54,42 @@ public class TasksController : TasksManagementBaseController
     [HttpPut]
     [Route("{taskId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public IActionResult Update(
         [FromRoute] int taskId, 
         [FromBody] RequestUpdateTaskJson request)
     {
-        var useCase = new UpdateTaskUseCase(Tasks);
+        try
+        {
+            var useCase = new UpdateTaskUseCase(Tasks);
 
-        useCase.Execute(taskId, request);
+            useCase.Execute(taskId, request);
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound("Task not found");
+        }
     }
 
     [HttpDelete]
     [Route("{taskId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public IActionResult Delete([FromRoute] int taskId)
     {
-        var useCase = new DeleteTaskUseCase(Tasks);
+        try
+        {
+            var useCase = new DeleteTaskUseCase(Tasks);
 
-        useCase.Execute(taskId);
+            useCase.Execute(taskId);
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound("Task not found");
+        }
     }
 }
