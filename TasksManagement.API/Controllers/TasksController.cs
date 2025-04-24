@@ -3,6 +3,7 @@ using TasksManagement.Application.UseCases.Tasks.Create;
 using TasksManagement.Application.UseCases.Tasks.Delete;
 using TasksManagement.Application.UseCases.Tasks.FetchAll;
 using TasksManagement.Application.UseCases.Tasks.GetById;
+using TasksManagement.Application.UseCases.Tasks.Update;
 using TasksManagement.Communication.Requests;
 using TasksManagement.Communication.Responses;
 
@@ -48,6 +49,20 @@ public class TasksController : TasksManagementBaseController
         }
 
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("{taskId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult Update(
+        [FromRoute] int taskId, 
+        [FromBody] RequestUpdateTaskJson request)
+    {
+        var useCase = new UpdateTaskUseCase(Tasks);
+
+        useCase.Execute(taskId, request);
+
+        return NoContent();
     }
 
     [HttpDelete]

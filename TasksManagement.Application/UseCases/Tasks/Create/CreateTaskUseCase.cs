@@ -5,14 +5,9 @@ using TasksManagement.Communication.Responses;
                                               
 namespace TasksManagement.Application.UseCases.Tasks.Create;
 
-public class CreateTaskUseCase
+public class CreateTaskUseCase(IList<Entities.Task> tasks)
 {
-    private readonly IList<Entities.Task> _tasks;
-
-    public CreateTaskUseCase(IList<Entities.Task> tasks)
-    {
-        _tasks = tasks;
-    }
+    private readonly IList<Entities.Task> _tasks = tasks;
 
     public ResponseCreatedTaskJson Execute(RequestCreateTaskJson request)
     {
