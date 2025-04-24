@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TasksManagement.Communication\TasksManagement.Communication.csproj" />
+  </ItemGroup>
+
 </Project>
