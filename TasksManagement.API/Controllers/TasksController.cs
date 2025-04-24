@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TasksManagement.Application.UseCases.Tasks.Create;
+using TasksManagement.Application.UseCases.Tasks.Delete;
 using TasksManagement.Application.UseCases.Tasks.FetchAll;
 using TasksManagement.Application.UseCases.Tasks.GetById;
 using TasksManagement.Communication.Requests;
@@ -47,5 +48,17 @@ public class TasksController : TasksManagementBaseController
         }
 
         return Ok(response);
+    }
+
+    [HttpDelete]
+    [Route("{taskId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult Delete([FromRoute] int taskId)
+    {
+        var useCase = new DeleteTaskUseCase(Tasks);
+
+        useCase.Execute(taskId);
+
+        return NoContent();
     }
 }
