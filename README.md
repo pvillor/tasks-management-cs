@@ -24,4 +24,4 @@
 - [X] Deve ser possível visualizar todas as tarefas criadas;
 - [X] Deve ser possível visualizar uma tarefa buscando pelo seu id;
 - [] Deve ser possível editar informações de uma tarefa;
-- [] Deve ser possível excluir uma tarefa.
+- [X] Deve ser possível excluir uma tarefa.
